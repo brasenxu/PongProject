@@ -23,7 +23,7 @@ public class GameScreen extends JFrame implements KeyListener {
 	
 	public GameScreen(){
 		
-<<<<<<< HEAD
+
 		super("Pong");
 		xValue1 = 0;
 		yValue1 = 0;
@@ -32,17 +32,8 @@ public class GameScreen extends JFrame implements KeyListener {
 		yVelocity1 = 0;
 		yVelocity2 = 0;
 		addKeyListener(this);
-=======
-		screen = new Game();
-		//this.add(screen);
-		this.setTitle("Game of Pong");
-		this.setResizable(false);
-		this.setBackground(Color.BLACK);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.pack();
-		this.setVisible(true);
-		this.setLocationRelativeTo(null);
->>>>>>> refs/remotes/origin/master
+
+		
 	}
 	
 	public void keyTyped(KeyEvent e) {
