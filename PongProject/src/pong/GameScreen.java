@@ -12,7 +12,8 @@ public class GameScreen extends JFrame {
 	GameScreen(){
 		
 		screen = new Game();
-		
+		//this.add(screen);
+		this.setTitle("Game of Pong");
 		this.setResizable(false);
 		this.setBackground(Color.BLACK);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
