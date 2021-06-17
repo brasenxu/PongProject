@@ -11,8 +11,8 @@ public class GameScreen extends JFrame implements KeyListener {
 	    private static int WINDOWHEIGHT = 1000;
 	    private static int RECTWIDTH1 = 50;
 	    private static int RECTWIDTH2 = 50;
-	    private static int RECTHEIGHT1 = 300;
-	    private static int RECTHEIGHT2 = 300;
+	    private static int RECTHEIGHT1 = 250;
+	    private static int RECTHEIGHT2 = 250;
 	    private double xValue1;
 	    private double yValue1;
 	    private double yVelocity1;
