@@ -5,7 +5,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import javax.swing.*;
-import java.awt.Image;
 
 
 public class GameScreen extends JFrame implements KeyListener {
@@ -66,15 +65,9 @@ public class GameScreen extends JFrame implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 	
 	}
-	public void paint(Graphics g) {
-		Image img = CreateImage();
-		g.drawImage(img,(int) xValue1,(int) yValue1, this);
-		
-	}
 	
-	public Image CreateImage() {
-		BufferedImage bufferedImage = new BufferedImage(WINDOWWIDTH, WINDOWHEIGHT, BufferedImage.TYPE_INT_RGB);
-		Graphics g = bufferedImage.getGraphics();
+	public void paint(Graphics g) {
+		
 		
 		g.clearRect(0, 0, WINDOWWIDTH, WINDOWHEIGHT);
 		g.fillRect((int)xValue1, (int)yValue1, RECTWIDTH1, RECTHEIGHT1);
@@ -82,7 +75,6 @@ public class GameScreen extends JFrame implements KeyListener {
 		
 		movement();
 		repaint();
-		return bufferedImage;
 	}
 	public void movement() {
 		if (yValue1 < 0) {
