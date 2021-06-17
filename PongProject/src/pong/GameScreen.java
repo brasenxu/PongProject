@@ -65,7 +65,22 @@ public class GameScreen extends JFrame implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 	
 	}
-	
+	public void run() {
+		long LastTime = System.nanoTime();
+		double amountOfTicks = 60.0;
+		double ns = 1000000000 / amountOfTicks;
+		double delta = 0;
+		while (true) {
+			long now = System.nanoTime();
+			delta += (now-LastTime)/ns;
+			LastTime = now;
+			if(delta >=1) {
+				movement();
+				repaint();
+				delta--;	
+			}
+		}
+	}
 	public void paint(Graphics g) {
 		
 		
