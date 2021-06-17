@@ -2,8 +2,11 @@ package pong;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.*;
 import javax.swing.*;
+import java.awt.Image;
+
 
 public class GameScreen extends JFrame implements KeyListener {
 	
@@ -19,7 +22,7 @@ public class GameScreen extends JFrame implements KeyListener {
 	    private double xValue2;
 	    private double yValue2;
 	    private double yVelocity2;
-	
+	    
 	
 	public GameScreen(){
 		
@@ -32,7 +35,7 @@ public class GameScreen extends JFrame implements KeyListener {
 		yVelocity1 = 0;
 		yVelocity2 = 0;
 		addKeyListener(this);
-
+		
 		
 	}
 	
@@ -61,15 +64,25 @@ public class GameScreen extends JFrame implements KeyListener {
 	}
 	
 	public void keyPressed(KeyEvent e) {
+	
+	}
+	public void paint(Graphics g) {
+		Image img = CreateImage();
+		g.drawImage(img,(int) xValue1,(int) yValue1, this);
+		
 	}
 	
-	public void paint(Graphics g) {
+	public Image CreateImage() {
+		BufferedImage bufferedImage = new BufferedImage(WINDOWWIDTH, WINDOWHEIGHT, BufferedImage.TYPE_INT_RGB);
+		Graphics g = bufferedImage.getGraphics();
+		
 		g.clearRect(0, 0, WINDOWWIDTH, WINDOWHEIGHT);
 		g.fillRect((int)xValue1, (int)yValue1, RECTWIDTH1, RECTHEIGHT1);
 		g.fillRect((int)xValue2, (int)yValue2, RECTWIDTH2, RECTHEIGHT2);
 		
 		movement();
 		repaint();
+		return bufferedImage;
 	}
 	public void movement() {
 		if (yValue1 < 0) {
@@ -90,6 +103,7 @@ public class GameScreen extends JFrame implements KeyListener {
 		}
 			
 	}
+	
 		
 	public static void main(String [] args) {
 		GameScreen screen = new GameScreen();
