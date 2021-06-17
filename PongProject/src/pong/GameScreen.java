@@ -9,8 +9,8 @@ public class GameScreen extends JFrame implements KeyListener {
 	
 	 	private static int WINDOWWIDTH = 1000;
 	    private static int WINDOWHEIGHT = 1000;
-	    private static int RECTWIDTH1 = 100;
-	    private static int RECTWIDTH2 = 100;
+	    private static int RECTWIDTH1 = 50;
+	    private static int RECTWIDTH2 = 50;
 	    private static int RECTHEIGHT1 = 300;
 	    private static int RECTHEIGHT2 = 300;
 	    private double xValue1;
@@ -76,10 +76,10 @@ public class GameScreen extends JFrame implements KeyListener {
 			yValue2 = 1;
 		}
 		else if (yValue1 > WINDOWHEIGHT-RECTHEIGHT1) {
-			yValue1 = WINDOWHEIGHT-RECTHEIGHT1;
+			yValue1 = WINDOWHEIGHT-(2*RECTHEIGHT1);
 		}
 		else if (yValue2 > WINDOWHEIGHT-RECTHEIGHT2) {
-			yValue2 = WINDOWHEIGHT-RECTHEIGHT2;
+			yValue2 = WINDOWHEIGHT-(2*RECTHEIGHT2);
 		}
 		else {
 			yValue1 += yVelocity1;
