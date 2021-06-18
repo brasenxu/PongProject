@@ -72,8 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
 	//draw method
 	public void draw(Graphics g) {
 		//if state is not menu, call the game
-		if(state == STATE.GAME) {
-			repaint();
+		if(state == STATE.GAME || state == STATE.AI) {
 			//draws paddles, balls, and score
 			paddle1.draw(g); 
 			paddle2.draw(g);
@@ -86,7 +85,6 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		else  if (state == STATE.INSTRUCTIONS)
 		{
-			repaint();
 			instruct.draw(g);
 		}
 	}
@@ -159,10 +157,16 @@ public class GamePanel extends JPanel implements Runnable{
 			delta += (now - lastTime)/ns;
 			lastTime = now;
 			if(delta >= 1) {
-				move();
-				checkCollision();
-				repaint();
-				delta--;
+				if(state == STATE.GAME || state == STATE.AI) {
+					move();
+					checkCollision();
+					repaint();
+					delta--;
+				}
+				else {
+					repaint();
+					delta--;
+				}
 			}
 		}
 	}
