@@ -17,6 +17,9 @@ public class MouseInput implements MouseListener {
 		 */
 
 		// ai Button
+		if (GamePanel.state == GamePanel.STATE.MENU) {
+			
+		
 		if (mouseX >= GamePanel.GAME_WIDTH / 2 - 50 && mouseX <= GamePanel.GAME_WIDTH / 2 + 50) {
 			if (mouseY >= 150 && mouseY <= 200) {
 				GamePanel.state = GamePanel.STATE.AI;
@@ -35,10 +38,14 @@ public class MouseInput implements MouseListener {
 				GamePanel.state = GamePanel.STATE.INSTRUCTIONS;
 			}
 		}
+		}
+		if (GamePanel.state == GamePanel.STATE.INSTRUCTIONS || GamePanel.state == GamePanel.STATE.GAME ) {
+			
 		if (mouseX >= 300 && mouseX <= 350) {
 			if (mouseY >= 10 && mouseY <= 50) {
 				GamePanel.state = GamePanel.STATE.MENU;
-			}
+			}	
+		}
 		}
 	}
 
