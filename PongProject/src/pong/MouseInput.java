@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 public class MouseInput implements MouseListener {
 	public void mousePressed(MouseEvent e) {
+		//get mouse click location
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 

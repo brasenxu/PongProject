@@ -10,9 +10,11 @@ public class Ball extends Rectangle{
 	int yVelocity;
 	int initialSpeed = 5;
 	
+	//create ball object constructor
 	Ball(int x, int y, int width, int height){
 		super(x,y,width,height);
 
+		//pick a random direction to go to
 		int randomXDirection = (int)(Math.random()*2);
 		if(randomXDirection == 0) {
 			randomXDirection--;
@@ -26,6 +28,7 @@ public class Ball extends Rectangle{
 		setYDirection(randomYDirection*initialSpeed);
 	}
 	
+	//move the ball
 	public void setXDirection(int randomXDirection) {
 		xVelocity = randomXDirection;
 	}
@@ -36,6 +39,7 @@ public class Ball extends Rectangle{
 		x += xVelocity;
 		y += yVelocity;
 	}
+	//create the ball
 	public void draw(Graphics g) {
 		g.setColor(Color.white);
 		g.fillOval(x, y, height, width);

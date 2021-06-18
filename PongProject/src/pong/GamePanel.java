@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class GamePanel extends JPanel implements Runnable{
 	
+	//create variables needed
 	static final int GAME_WIDTH = 1000;
 	static final int GAME_HEIGHT = (int)(GAME_WIDTH * (0.5555));
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
@@ -23,63 +24,73 @@ public class GamePanel extends JPanel implements Runnable{
 	Score score;
 	Menu menu;
 	
+	//create enum
 	public static enum STATE{
 		MENU,
 		AI,
 		GAME
 	};
 	
-	public static STATE state = STATE.MENU;
+	public static STATE state = STATE.MENU; //define enum, set it to menu
 	
 	GamePanel(){
-		menu = new Menu();
-		newPaddles();
-		newBall();
-		score = new Score(GAME_WIDTH, GAME_HEIGHT);
+		menu = new Menu(); //create menu object
+		newPaddles(); //create paddle objects
+		newBall(); //create ball object
+		score = new Score(GAME_WIDTH, GAME_HEIGHT); //create score object
 		this.setFocusable(true);
-		this.addKeyListener(new AL());
+		this.addKeyListener(new AL()); //create key listener
 		this.setPreferredSize(SCREEN_SIZE);
-		this.addMouseListener(new MouseInput());
+		this.addMouseListener(new MouseInput()); //create mouse listener
+		//start game thread
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 	
+	//new ball method
 	public void newBall() {
 		ball = new Ball((GAME_WIDTH/2)-(BALL_DIAMETER/2),(GAME_HEIGHT/2)-(BALL_DIAMETER/2),BALL_DIAMETER,BALL_DIAMETER);
 	}
 	
+	//new paddle method
 	public void newPaddles() {
 		paddle1 = new Paddle(0,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,1);
 		paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
 	}
 	
+	//paint method
 	public void paint(Graphics g) {
 		image = createImage(getWidth(), getHeight());
 		graphics = image.getGraphics();
-		draw(graphics);
+		draw(graphics); //call draw method
 		g.drawImage(image, 0, 0, this);
 	}
 	
+	//draw method
 	public void draw(Graphics g) {
+		//if state is not menu, call the game
 		if(state != STATE.MENU) {
 			repaint();
-			paddle1.draw(g);
+			//draws paddles, balls, and score
+			paddle1.draw(g); 
 			paddle2.draw(g);
 			ball.draw(g);
 			score.draw(g);
-			Toolkit.getDefaultToolkit().sync();
+			Toolkit.getDefaultToolkit().sync(); //makes game smoother
 		}
 		else if(state == STATE.MENU) {
-			menu.draw(g);
+			menu.draw(g); //call menu
 		}
 	}
 	
+	//refreshes the location of the objects
 	public void move() {
 		paddle1.move();
 		paddle2.move();
 		ball.move();
 	}
 	
+	//check object collision
 	public void checkCollision() {
 		
 		//bounce ball off top & bottom window edges
@@ -128,6 +139,7 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
+	//run thread
 	public void run() {
 		//game loop
 		long lastTime = System.nanoTime();
@@ -147,6 +159,7 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	
+	//key adapter
 	public class AL extends KeyAdapter{
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
