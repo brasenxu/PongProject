@@ -9,6 +9,7 @@ public class Intructions {
 
 	
 	public void draw(Graphics g) {
+		
 		//create 2 fonts
 		Font font1 = new Font("arial", Font.BOLD, 50);
 		Font font2 = new Font("arial", Font.PLAIN, 30);
