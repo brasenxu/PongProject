@@ -12,7 +12,7 @@ public class Menu {
 	//create rectangles as buttons
 	public Rectangle aiButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 150, 100, 50);
 	public Rectangle playButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 250, 100, 50);
-	public Rectangle helpButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 350, 100, 50);
+	public Rectangle helpButton = new Rectangle(GamePanel.GAME_WIDTH/2-96, 350, 200, 50);
 	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -29,7 +29,7 @@ public class Menu {
 		//label of buttons
 		g.drawString("1 vs AI", aiButton.x + 5, aiButton.y + 37);
 		g.drawString("1 vs 1", playButton.x + 10, playButton.y + 37);
-		g.drawString("Help", helpButton.x + 18, helpButton.y + 37);
+		g.drawString("Intructions", helpButton.x + 29, helpButton.y + 37);
 		
 		//draw rectangles
 		g2d.draw(aiButton);
