@@ -23,18 +23,21 @@ public class GamePanel extends JPanel implements Runnable{
 	Ball ball;
 	Score score;
 	Menu menu;
+	Instructions instruct;
 	
 	//create enum
 	public static enum STATE{
 		MENU,
 		AI,
-		GAME
+		GAME,
+		INSTRUCTIONS
 	};
 	
 	public static STATE state = STATE.MENU; //define enum, set it to menu
 	
 	GamePanel(){
 		menu = new Menu(); //create menu object
+		instruct = new Instructions();
 		newPaddles(); //create paddle objects
 		newBall(); //create ball object
 		score = new Score(GAME_WIDTH, GAME_HEIGHT); //create score object
@@ -69,7 +72,7 @@ public class GamePanel extends JPanel implements Runnable{
 	//draw method
 	public void draw(Graphics g) {
 		//if state is not menu, call the game
-		if(state != STATE.MENU) {
+		if(state == STATE.GAME) {
 			repaint();
 			//draws paddles, balls, and score
 			paddle1.draw(g); 
@@ -80,6 +83,11 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		else if(state == STATE.MENU) {
 			menu.draw(g); //call menu
+		}
+		else  if (state == STATE.INSTRUCTIONS)
+		{
+			repaint();
+			instruct.draw(g);
 		}
 	}
 	
