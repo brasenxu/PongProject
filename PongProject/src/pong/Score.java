@@ -38,7 +38,6 @@ public class Score extends Rectangle{
 		
 		if(player1 == 10) {
 			g.drawString("Player 1 wins!", (GAME_WIDTH/2)-245, 240);
-			GamePanel.state = GamePanel.STATE.END;
 			g2d.draw(MenuButton);
 			g.setColor(Color.white);
 			g2d.fill(MenuButton);
@@ -48,7 +47,6 @@ public class Score extends Rectangle{
 		}
 		else if(player2 == 10) {
 			g.drawString("Player 2 wins!", (GAME_WIDTH/2)-245, 240);
-			GamePanel.state = GamePanel.STATE.END;
 			g2d.draw(MenuButton);
 			g.setColor(Color.white);
 			g2d.fill(MenuButton);

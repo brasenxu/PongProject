@@ -20,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Random random;
 	Paddle paddle1;
 	Paddle paddle2;
+	AIpaddle aiPaddle;
 	Ball ball;
 	Score score;
 	Menu menu;
@@ -31,7 +32,6 @@ public class GamePanel extends JPanel implements Runnable{
 		AI,
 		GAME,
 		INSTRUCTIONS,
-		END, END1
 	};
 	
 	public static STATE state = STATE.MENU; //define enum, set it to menu
@@ -39,8 +39,9 @@ public class GamePanel extends JPanel implements Runnable{
 	GamePanel(){
 		menu = new Menu(); //create menu object
 		instruct = new Instructions();
-		newPaddles(); //create paddle objects
 		newBall(); //create ball object
+		newPaddles(); //create paddle objects	
+		newAI(); //create ai object
 		score = new Score(GAME_WIDTH, GAME_HEIGHT); //create score object
 		this.setFocusable(true);
 		this.addKeyListener(new AL()); //create key listener
@@ -62,8 +63,9 @@ public class GamePanel extends JPanel implements Runnable{
 		paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
 	}
 	
-	public void aiPaddle() {
-		//aiPadle = new AIpaddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
+	//new ai method
+	public void newAI() {
+		aiPaddle = new AIpaddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT, ball);
 	}
 	
 	//paint method
@@ -77,10 +79,15 @@ public class GamePanel extends JPanel implements Runnable{
 	//draw method
 	public void draw(Graphics g) {
 		//if state is not menu, call the game
-		if(state == STATE.GAME || state == STATE.AI || state == STATE.END) {
+		if(state == STATE.GAME || state == STATE.AI) {
 			//draws paddles, balls, and score
 			paddle1.draw(g); 
-			paddle2.draw(g);
+			if(state == STATE.GAME) {
+				paddle2.draw(g);
+			}
+			else if(state == STATE.AI) {
+				aiPaddle.draw(g);
+			}
 			ball.draw(g);
 			score.draw(g);
 			Toolkit.getDefaultToolkit().sync(); //makes game smoother
@@ -100,9 +107,17 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	//refreshes the location of the objects
 	public void move() {
-		paddle1.move();
-		paddle2.move();
-		ball.move();
+		if(state == STATE.GAME) {
+			ball.move();
+			paddle1.move();
+			paddle2.move();			
+		}
+		else if(state == STATE.AI) {
+			ball.move();
+			paddle1.move();
+			aiPaddle.move();
+			//System.out.println(ball.y);
+		}
 	}
 	
 	//check object collision
@@ -127,6 +142,11 @@ public class GamePanel extends JPanel implements Runnable{
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
 		}
+		if(ball.intersects(aiPaddle)) {
+			ball.xVelocity = Math.abs(ball.xVelocity);
+			ball.setXDirection(-ball.xVelocity);
+			ball.setYDirection(ball.yVelocity);
+		}
 		
 		//stops paddles at window edges
 		if(paddle1.y<=0) {
@@ -141,16 +161,24 @@ public class GamePanel extends JPanel implements Runnable{
 		if(paddle2.y>= (GAME_HEIGHT-PADDLE_HEIGHT)) {
 			paddle2.y = GAME_HEIGHT-PADDLE_HEIGHT;
 		}
+		if(aiPaddle.y<=0) {
+			aiPaddle.y=0;
+		}
+		if(aiPaddle.y>= (GAME_HEIGHT-PADDLE_HEIGHT)) {
+			aiPaddle.y = GAME_HEIGHT-PADDLE_HEIGHT;
+		}
 		//give a player one point and creates new paddles & ball
 		if(ball.x <= 0) {
 			score.player2++;
-			newPaddles();
 			newBall();
+			newPaddles();
+			newAI();			
 		}
 		if(ball.x >= GAME_WIDTH-BALL_DIAMETER) {
 			score.player1++;
-			newPaddles();
 			newBall();
+			newPaddles();
+			newAI();			
 		}
 	}
 	
