@@ -35,7 +35,7 @@ public class MouseInput implements MouseListener {
 				GamePanel.state = GamePanel.STATE.INSTRUCTIONS;
 			}
 		}
-		if (mouseX >= 10 && mouseX <= 50) {
+		if (mouseX >= 300 && mouseX <= 350) {
 			if (mouseY >= 10 && mouseY <= 50) {
 				GamePanel.state = GamePanel.STATE.MENU;
 			}

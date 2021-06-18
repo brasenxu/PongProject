@@ -8,7 +8,7 @@ import java.awt.Rectangle;
 
 public class Instructions {
 
-	public Rectangle BackButton = new Rectangle(10, 10, 50, 50);
+	public Rectangle BackButton = new Rectangle(300, 10, 50, 50);
 	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -33,7 +33,7 @@ public class Instructions {
 		
 		g.setFont(font3);
 		
-		g.drawString("back",20 ,39 );
+		g.drawString("back",310 ,39 );
 	}
 	
 	
