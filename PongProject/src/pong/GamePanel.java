@@ -83,6 +83,8 @@ public class GamePanel extends JPanel implements Runnable{
 		else if(state == STATE.MENU) {
 			score.player1 = 0;
 			score.player2 = 0;
+			ball.x = (GAME_WIDTH/2)-(BALL_DIAMETER/2);
+			ball.y = (GAME_HEIGHT/2)-(BALL_DIAMETER/2);
 			menu.draw(g); //call menu
 		}
 		else  if (state == STATE.INSTRUCTIONS)
