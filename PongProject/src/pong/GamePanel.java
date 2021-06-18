@@ -81,6 +81,8 @@ public class GamePanel extends JPanel implements Runnable{
 			Toolkit.getDefaultToolkit().sync(); //makes game smoother
 		}
 		else if(state == STATE.MENU) {
+			score.player1 = 0;
+			score.player2 = 0;
 			menu.draw(g); //call menu
 		}
 		else  if (state == STATE.INSTRUCTIONS)
