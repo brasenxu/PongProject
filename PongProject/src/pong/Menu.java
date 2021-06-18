@@ -13,6 +13,7 @@ public class Menu {
 	public Rectangle aiButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 150, 100, 50);
 	public Rectangle playButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 250, 100, 50);
 	public Rectangle helpButton = new Rectangle(GamePanel.GAME_WIDTH/2-96, 350, 200, 50);
+	public Rectangle exitButton = new Rectangle(GamePanel.GAME_WIDTH-100, GamePanel.GAME_HEIGHT-75, 75, 50);
 	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
@@ -26,16 +27,21 @@ public class Menu {
 		
 		g.setFont(font2);
 		
+		//draw rectangles
+		g.setColor(Color.red);
+		g2d.fill(exitButton);
+		g.setColor(Color.white);
+		g2d.draw(exitButton);
+		g2d.draw(aiButton);
+		g2d.draw(playButton);
+		g2d.draw(helpButton);
+		
 		//label of buttons
 		g.drawString("1 vs AI", aiButton.x + 5, aiButton.y + 37);
 		g.drawString("1 vs 1", playButton.x + 10, playButton.y + 37);
 		g.drawString("Intructions", helpButton.x + 29, helpButton.y + 37);
+		g.drawString("EXIT", exitButton.x + 5, exitButton.y + 37);
 		
-		//draw rectangles
-		g2d.draw(aiButton);
-		g2d.draw(playButton);
-		g2d.draw(helpButton);
-
 		g.drawString("Made by: Brasen & Nathan", 325, 475);
 	}
 }

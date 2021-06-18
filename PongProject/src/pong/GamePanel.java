@@ -30,7 +30,8 @@ public class GamePanel extends JPanel implements Runnable{
 		MENU,
 		AI,
 		GAME,
-		INSTRUCTIONS
+		INSTRUCTIONS,
+		END, END1
 	};
 	
 	public static STATE state = STATE.MENU; //define enum, set it to menu
@@ -61,6 +62,10 @@ public class GamePanel extends JPanel implements Runnable{
 		paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
 	}
 	
+	public void aiPaddle() {
+		//aiPadle = new AIpaddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
+	}
+	
 	//paint method
 	public void paint(Graphics g) {
 		image = createImage(getWidth(), getHeight());
@@ -72,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable{
 	//draw method
 	public void draw(Graphics g) {
 		//if state is not menu, call the game
-		if(state == STATE.GAME || state == STATE.AI) {
+		if(state == STATE.GAME || state == STATE.AI || state == STATE.END) {
 			//draws paddles, balls, and score
 			paddle1.draw(g); 
 			paddle2.draw(g);
