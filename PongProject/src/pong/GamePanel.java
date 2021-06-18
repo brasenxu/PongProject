@@ -87,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
 			ball.y = (GAME_HEIGHT/2)-(BALL_DIAMETER/2);
 			menu.draw(g); //call menu
 		}
-		else  if (state == STATE.INSTRUCTIONS)
+		else  if (state == STATE.INSTRUCTIONS) //help screen
 		{
 			instruct.draw(g);
 		}
@@ -161,13 +161,17 @@ public class GamePanel extends JPanel implements Runnable{
 			delta += (now - lastTime)/ns;
 			lastTime = now;
 			if(delta >= 1) {
-				if(state == STATE.GAME || state == STATE.AI) {
+				if((state == STATE.GAME || state == STATE.AI) && (score.player1 < 10 && score.player2 < 10)) { 
 					move();
 					checkCollision();
 					repaint();
 					delta--;
 				}
-				else {
+				else if(score.player1 == 10 || score.player2 == 10) {
+					repaint();
+					delta--;
+				}
+				else{
 					repaint();
 					delta--;
 				}

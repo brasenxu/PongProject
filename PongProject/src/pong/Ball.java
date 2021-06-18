@@ -8,7 +8,7 @@ public class Ball extends Rectangle{
 	
 	int xVelocity;
 	int yVelocity;
-	int initialSpeed = 5;
+	int initialSpeed = 20;
 	
 	//create ball object constructor
 	Ball(int x, int y, int width, int height){

@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 public class Score extends Rectangle{
 	
 	public Rectangle BackButton = new Rectangle(300, 10, 50, 50);
+	public Rectangle PlayButton = new Rectangle(700, 400, 75, 50);
+	public Rectangle MenuButton = new Rectangle(300, 400, 75, 50);
 	static int GAME_WIDTH;
 	static int GAME_HEIGHT;
 	int player1;
@@ -32,11 +34,20 @@ public class Score extends Rectangle{
 		g.drawString(String.valueOf(player1/10) + String.valueOf(player1%10), (GAME_WIDTH/2)-85, 50);
 		g.drawString(String.valueOf(player2/10) + String.valueOf(player2%10), (GAME_WIDTH/2)+20, 50);
 		
-		g2d.draw(BackButton);
-		
-		g.setFont(font3);
-		
-		g.drawString("back",310 ,39 );
-		
+		if(player1 == 10) {
+			g.drawString("Player 1 wins!", (GAME_WIDTH/2)-245, 240);
+			g2d.draw(PlayButton);
+			g2d.draw(MenuButton);
+		}
+		else if(player2 == 10) {
+			g.drawString("Player 2 wins!", (GAME_WIDTH/2)-245, 240);
+			g2d.draw(PlayButton);
+			g2d.draw(MenuButton);
+		}
+		else {
+			g2d.draw(BackButton);			
+			g.setFont(font3);
+			g.drawString("back",310 ,39 );
+		}
 	}
 }
