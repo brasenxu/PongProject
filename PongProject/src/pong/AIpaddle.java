@@ -7,23 +7,22 @@ public class AIpaddle extends Rectangle{
 	
 	int id;
 	int yVelocity;
+	int speed = 5; //set speed
 	Ball ball;
 	
 	AIpaddle(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, Ball b){
 		//create rectangle object
 		super(x,y,PADDLE_WIDTH,PADDLE_HEIGHT);
 		ball = b;
+
 	}
 	
-	public void setYDirection() {
-		
-	}
 	//updates position of rectangle
-	public void move() {
-		yVelocity = ball.yVelocity;
+	public void move() {		
+		yVelocity = (int)((ball.yVelocity)/1.25);
 		y= y + yVelocity;
-		System.out.println(y);
 	}
+	
 	public void draw(Graphics g) {
 		//set colour of rectangles
 		g.setColor(Color.red);
