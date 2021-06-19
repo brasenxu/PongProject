@@ -1,6 +1,5 @@
 package pong;
 
-import java.awt.*;
 import java.awt.event.*;
 
 public class MouseInput implements MouseListener {
@@ -8,14 +7,6 @@ public class MouseInput implements MouseListener {
 		// get mouse click location
 		int mouseX = e.getX();
 		int mouseY = e.getY();
-
-		/**
-		 * public Rectangle aiButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 150,
-		 * 100, 50); public Rectangle playButton = new
-		 * Rectangle(GamePanel.GAME_WIDTH/2-50, 250, 100, 50); public Rectangle
-		 * helpButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 350, 100, 50);
-		 */
-
 		
 		if (GamePanel.state == GamePanel.STATE.MENU) {
 			// ai Button
@@ -50,7 +41,7 @@ public class MouseInput implements MouseListener {
 		if (GamePanel.state != GamePanel.STATE.MENU) {
 			//main menu button(s)
 			if (mouseX >= 300 && mouseX <= 350) {
-				if (mouseY >= 10 && mouseY <= 50) {
+				if (mouseY >= 10 && mouseY <= 60) {
 					GamePanel.state = GamePanel.STATE.MENU;
 				}
 			}
