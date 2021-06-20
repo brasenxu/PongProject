@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Score score;
 	Menu menu;
 	Instructions instruct;
+	Sound paddleSound;
 	
 	//create enum
 	public static enum STATE{
@@ -43,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable{
 		newPaddles(); //create paddle objects	
 		newAI(); //create ai object
 		score = new Score(GAME_WIDTH, GAME_HEIGHT); //create score object
+		paddleSound = new Sound(".//res//PaddleSound.wav");
 		this.setFocusable(true);
 		this.addKeyListener(new AL()); //create key listener
 		this.setPreferredSize(SCREEN_SIZE);
@@ -136,16 +138,22 @@ public class GamePanel extends JPanel implements Runnable{
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
+			paddleSound.soundFile();
+			paddleSound.playSound();
 		}
 		if(ball.intersects(paddle2)) {
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
+			paddleSound.soundFile();
+			paddleSound.playSound();
 		}
 		if(ball.intersects(aiPaddle)) {
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
+			paddleSound.soundFile();
+			paddleSound.playSound();
 		}
 		
 		//stops paddles at window edges
