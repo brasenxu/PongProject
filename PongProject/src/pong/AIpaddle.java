@@ -25,7 +25,7 @@ public class AIpaddle extends Rectangle{
 	
 	public void draw(Graphics g) {
 		//set colour of rectangles
-		g.setColor(Color.red);
+		g.setColor(Color.orange);
 		g.fillRect(x, y, width, height);
 	}
 }

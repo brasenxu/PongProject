@@ -21,8 +21,8 @@ public class Instructions {
 		g.setFont(font2);
 		
 		//label of buttons
-		g.drawString("Move Blue player with 'w' and 's' keys",250 , 200 );
-		g.drawString("Move Red player with 'up' and 'down' arrows",200 ,275 );
+		g.drawString("Move Cyan player with 'w' and 's' keys",250 , 200 );
+		g.drawString("Move Yellow player with 'up' and 'down' arrows",200 ,275 );
 		g.drawString("First player to score 10 goals WINS!",273 ,350 );
 		g.drawString("Made by: Brasen & Nathan", 325, 475);
 		g2d.draw(BackButton);

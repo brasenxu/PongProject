@@ -74,9 +74,9 @@ public class Paddle extends Rectangle{
 	public void draw(Graphics g) {
 		//set colour of rectangles
 		if(id==1)
-			g.setColor(Color.blue);
+			g.setColor(Color.cyan);
 		else
-			g.setColor(Color.red);
+			g.setColor(Color.orange); // I know it says orange, but it really looks like yellow. Too bad!
 		g.fillRect(x, y, width, height);
 	}
 }

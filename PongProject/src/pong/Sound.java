@@ -1,8 +1,6 @@
 package pong;
 
-import java.awt.*;
 import java.io.File;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;

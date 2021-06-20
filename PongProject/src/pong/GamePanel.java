@@ -26,6 +26,8 @@ public class GamePanel extends JPanel implements Runnable{
 	Menu menu;
 	Instructions instruct;
 	Sound paddleSound;
+	Sound wallSound;
+	Sound scoreSound;
 	
 	//create enum
 	public static enum STATE{
@@ -45,6 +47,8 @@ public class GamePanel extends JPanel implements Runnable{
 		newAI(); //create ai object
 		score = new Score(GAME_WIDTH, GAME_HEIGHT); //create score object
 		paddleSound = new Sound(".//res//PaddleSound.wav");
+		wallSound = new Sound(".//res//WallSound.wav");
+		scoreSound = new Sound(".//res//ScoreSound.wav");
 		this.setFocusable(true);
 		this.addKeyListener(new AL()); //create key listener
 		this.setPreferredSize(SCREEN_SIZE);
@@ -128,9 +132,13 @@ public class GamePanel extends JPanel implements Runnable{
 		//bounce ball off top & bottom window edges
 		if(ball.y <=0) {
 			ball.setYDirection(-ball.yVelocity);
+			wallSound.soundFile();
+			wallSound.playSound();
 		}
 		if(ball.y >= GAME_HEIGHT-BALL_DIAMETER) {
 			ball.setYDirection(-ball.yVelocity);
+			wallSound.soundFile();
+			wallSound.playSound();
 		}
 		
 		//bounces ball off paddles
@@ -177,13 +185,17 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		//give a player one point and creates new paddles & ball
 		if(ball.x <= 0) {
-			score.player2++;
+			score.player2++;			
+			scoreSound.soundFile();
+			scoreSound.playSound();
 			newBall();
 			newPaddles();
 			newAI();			
 		}
 		if(ball.x >= GAME_WIDTH-BALL_DIAMETER) {
 			score.player1++;
+			scoreSound.soundFile();
+			scoreSound.playSound();
 			newBall();
 			newPaddles();
 			newAI();			
