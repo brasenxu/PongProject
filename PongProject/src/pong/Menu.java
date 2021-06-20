@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+
 public class Menu {
 	boolean isAi;
 	
@@ -14,8 +15,10 @@ public class Menu {
 	public Rectangle playButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 250, 100, 50);
 	public Rectangle helpButton = new Rectangle(GamePanel.GAME_WIDTH/2-96, 350, 200, 50);
 	public Rectangle exitButton = new Rectangle(GamePanel.GAME_WIDTH-100, GamePanel.GAME_HEIGHT-75, 75, 50);
+	Sound Menu;
 	
 	public void draw(Graphics g) {
+		Menu = new Sound(".//res//Menu.wav");
 		Graphics2D g2d = (Graphics2D) g;
 		//create 2 fonts
 		Font font1 = new Font("arial", Font.BOLD, 50);
@@ -43,5 +46,9 @@ public class Menu {
 		g.drawString("EXIT", exitButton.x + 5, exitButton.y + 37);
 		
 		g.drawString("Made by: Brasen & Nathan", 325, 475);
+		Menu.soundFile();
+		Menu.playSound();
+		
+		
 	}
 }

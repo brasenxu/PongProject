@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Sound wallSound;
 	Sound scoreSound;
 	
+	
 	//create enum
 	public static enum STATE{
 		MENU,
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
 		paddleSound = new Sound(".//res//PaddleSound.wav");
 		wallSound = new Sound(".//res//WallSound.wav");
 		scoreSound = new Sound(".//res//ScoreSound.wav");
+		
 		this.setFocusable(true);
 		this.addKeyListener(new AL()); //create key listener
 		this.setPreferredSize(SCREEN_SIZE);
@@ -104,6 +106,7 @@ public class GamePanel extends JPanel implements Runnable{
 			ball.x = (GAME_WIDTH/2)-(BALL_DIAMETER/2);
 			ball.y = (GAME_HEIGHT/2)-(BALL_DIAMETER/2);
 			menu.draw(g); //call menu
+			
 		}
 		else  if (state == STATE.INSTRUCTIONS) //help screen
 		{
