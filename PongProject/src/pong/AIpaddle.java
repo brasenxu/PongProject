@@ -5,7 +5,6 @@ import java.awt.event.*;
 
 public class AIpaddle extends Rectangle{
 	
-	int id;
 	int yVelocity;
 	int speed = 5; //set speed
 	Ball ball;
