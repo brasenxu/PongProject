@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable{
 	Sound wallSound;
 	Sound scoreSound;
 	Sound Menu;
-	int count = 0;
+	boolean isBeginning = true;
 	
 	//create enum
 	public static enum STATE{
@@ -106,11 +106,10 @@ public class GamePanel extends JPanel implements Runnable{
 			score.player2 = 0;
 			ball.x = (GAME_WIDTH/2)-(BALL_DIAMETER/2);
 			ball.y = (GAME_HEIGHT/2)-(BALL_DIAMETER/2);
-			System.out.println("Hello");
-			if(count == 0) {
+			if(isBeginning) {
 				Menu.soundFile();
 				Menu.playSound();
-				count++;
+				isBeginning = false;
 			}
 			menu.draw(g); //call menu
 			
