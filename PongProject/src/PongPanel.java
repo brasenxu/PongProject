@@ -207,7 +207,7 @@ public class PongPanel extends JPanel implements Runnable{
 			paddleSound.soundFile();
 			paddleSound.playSound();
 		}
-		if(ball.intersects(paddle2)) {
+		if(ball.intersects(paddle2) && state == STATE.GAME) {
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
@@ -215,7 +215,7 @@ public class PongPanel extends JPanel implements Runnable{
 			paddleSound.soundFile();
 			paddleSound.playSound();
 		}
-		if(ball.intersects(aiPaddle)) {
+		if(ball.intersects(aiPaddle) && state == STATE.AI) {	
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
@@ -246,7 +246,7 @@ public class PongPanel extends JPanel implements Runnable{
 		
 		//If ball goes past the left/right screen, 
 		//give a player one point and creates new paddles & ball
-		if(ball.x <= 0) {
+		if(ball.x <= -1) {
 			score.player2++; //update score for player 2			
 			//play score sound
 			scoreSound.soundFile();
@@ -256,7 +256,7 @@ public class PongPanel extends JPanel implements Runnable{
 			newPaddles();
 			newAI();			
 		}
-		if(ball.x >= WIDTH-BALL_DIAMETER) {
+		if(ball.x >= WIDTH-BALL_DIAMETER + 1) {
 			score.player1++; //update score for player 1
 			//play score sound
 			scoreSound.soundFile();
