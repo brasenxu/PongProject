@@ -29,7 +29,9 @@ public class GamePanel extends JPanel implements Runnable{
 	Sound wallSound;
 	Sound scoreSound;
 	Sound Menu;
-	boolean isBeginning = true;
+	Sound Instructions;
+	static boolean isInstructions = true;
+	static boolean isBeginning = true;
 	
 	//create enum
 	public static enum STATE{
@@ -51,7 +53,8 @@ public class GamePanel extends JPanel implements Runnable{
 		paddleSound = new Sound(".//res//PaddleSound.wav");
 		wallSound = new Sound(".//res//WallSound.wav");
 		scoreSound = new Sound(".//res//ScoreSound.wav");
-		Menu = new Sound(".//res//Menu.wav");
+		Menu = new Sound(".//res//MenuMusic.wav");
+		Instructions = new Sound(".//res//InstructionsSong.wav");
 		this.setFocusable(true);
 		this.addKeyListener(new AL()); //create key listener
 		this.setPreferredSize(SCREEN_SIZE);
@@ -60,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable{
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
-	
+		
 	//new ball method
 	public void newBall() {
 		ball = new Ball((GAME_WIDTH/2)-(BALL_DIAMETER/2),(GAME_HEIGHT/2)-(BALL_DIAMETER/2),BALL_DIAMETER,BALL_DIAMETER);
@@ -89,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void draw(Graphics g) {
 		//if state is not menu, call the game
 		if(state == STATE.GAME || state == STATE.AI) {
+			Menu.stop();
 			//draws paddles, balls, and score
 			paddle1.draw(g); 
 			if(state == STATE.GAME) {
@@ -102,6 +106,9 @@ public class GamePanel extends JPanel implements Runnable{
 			Toolkit.getDefaultToolkit().sync(); //makes game smoother
 		}
 		else if(state == STATE.MENU) {
+			if(!isInstructions) {
+				Instructions.stop();
+			}
 			score.player1 = 0;
 			score.player2 = 0;
 			ball.x = (GAME_WIDTH/2)-(BALL_DIAMETER/2);
@@ -109,13 +116,22 @@ public class GamePanel extends JPanel implements Runnable{
 			if(isBeginning) {
 				Menu.soundFile();
 				Menu.playSound();
+				Menu.loop();
 				isBeginning = false;
 			}
+			score.setEnd(true);
 			menu.draw(g); //call menu
 			
 		}
 		else  if (state == STATE.INSTRUCTIONS) //help screen
 		{
+			Menu.stop();
+			if(isInstructions) {
+				Instructions.soundFile();
+				Instructions.playSound();
+				Instructions.loop();
+				isInstructions = false;
+			}
 			instruct.draw(g);
 		}
 	}
@@ -131,7 +147,6 @@ public class GamePanel extends JPanel implements Runnable{
 			ball.move();
 			paddle1.move();
 			aiPaddle.move();
-			//System.out.println(ball.y);
 		}
 	}
 	

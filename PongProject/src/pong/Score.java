@@ -14,10 +14,17 @@ public class Score extends Rectangle{
 	static int height;
 	int player1;
 	int player2;
+	Sound winnerSound;
+	boolean isEnd = true;
 	
 	Score(int GAME_WIDTH, int GAME_HEIGHT){
+		winnerSound = new Sound(".//res//Victory.wav");
 		Score.width = GAME_WIDTH;
 		Score.height = GAME_HEIGHT;
+	}
+	
+	public void setEnd(boolean End) {
+		isEnd = End;
 	}
 	
 	public void draw(Graphics g) {
@@ -33,11 +40,14 @@ public class Score extends Rectangle{
 		//draw player score
 		g.drawString(String.valueOf(player1/10) + String.valueOf(player1%10), (width/2)-85, 50);
 		g.drawString(String.valueOf(player2/10) + String.valueOf(player2%10), (width/2)+20, 50);
-		
-		
-		
+				
 		if(player1 == 10) {
 			g.drawString("Player 1 wins!", (width/2)-245, 240);
+			if(isEnd) {
+				winnerSound.soundFile();
+				winnerSound.playSound();
+				isEnd = false;
+			}
 			g2d.draw(MenuButton);
 			g.setColor(Color.white);
 			g2d.fill(MenuButton);
@@ -47,6 +57,11 @@ public class Score extends Rectangle{
 		}
 		else if(player2 == 10) {
 			g.drawString("Player 2 wins!", (width/2)-245, 240);
+			if(isEnd) {
+				winnerSound.soundFile();
+				winnerSound.playSound();
+				isEnd = false;
+			}
 			g2d.draw(MenuButton);
 			g.setColor(Color.white);
 			g2d.fill(MenuButton);

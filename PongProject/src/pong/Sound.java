@@ -29,4 +29,13 @@ public class Sound {
 		myClip.start();
 	}
 	
+	public void loop() {
+		myClip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+	
+	public void stop() {
+		myClip.stop();
+		myClip.close();
+	}
+	
 }

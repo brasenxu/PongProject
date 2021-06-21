@@ -7,11 +7,15 @@ public class MouseInput implements MouseListener {
 		// get mouse click location
 		int mouseX = e.getX();
 		int mouseY = e.getY();
+		Sound click = new Sound(".//res//buttonClick.wav");
 		
 		if (GamePanel.state == GamePanel.STATE.MENU) {
 			// ai Button
 			if (mouseX >= GamePanel.GAME_WIDTH / 2 - 50 && mouseX <= GamePanel.GAME_WIDTH / 2 + 50) {
 				if (mouseY >= 150 && mouseY <= 200) {
+					click.soundFile();
+					click.playSound();
+					GamePanel.isBeginning = true;
 					GamePanel.state = GamePanel.STATE.AI;
 				}
 			}
@@ -19,6 +23,9 @@ public class MouseInput implements MouseListener {
 			// 1v1 Button
 			if (mouseX >= GamePanel.GAME_WIDTH / 2 - 50 && mouseX <= GamePanel.GAME_WIDTH / 2 + 50) {
 				if (mouseY >= 250 && mouseY <= 300) {
+					click.soundFile();
+					click.playSound();
+					GamePanel.isBeginning = true;
 					GamePanel.state = GamePanel.STATE.GAME;
 				}
 			}
@@ -26,6 +33,9 @@ public class MouseInput implements MouseListener {
 			// help button
 			if (mouseX >= GamePanel.GAME_WIDTH / 2 - 96 && mouseX <= GamePanel.GAME_WIDTH / 2 + 146) {
 				if (mouseY >= 350 && mouseY <= 400) {
+					click.soundFile();
+					click.playSound();
+					GamePanel.isInstructions = true;
 					GamePanel.state = GamePanel.STATE.INSTRUCTIONS;
 				}
 			}
@@ -34,6 +44,8 @@ public class MouseInput implements MouseListener {
 			//public Rectangle exitButton = new Rectangle(GamePanel.GAME_WIDTH-100, GamePanel.GAME_HEIGHT-75, 75, 50);
 			if(mouseX >= GamePanel.GAME_WIDTH-100 && mouseX <= GamePanel.GAME_WIDTH-25) {
 				if(mouseY >= GamePanel.GAME_HEIGHT-75 && mouseY <= GamePanel.GAME_HEIGHT-25) {
+					click.soundFile();
+					click.playSound();
 					System.exit(1);
 				}
 			}
@@ -42,11 +54,17 @@ public class MouseInput implements MouseListener {
 			//main menu button(s)
 			if (mouseX >= 300 && mouseX <= 350) {
 				if (mouseY >= 10 && mouseY <= 60) {
+					click.soundFile();
+					click.playSound();
+					GamePanel.isBeginning = true;
 					GamePanel.state = GamePanel.STATE.MENU;
 				}
 			}
 			if(mouseX >= 425 && mouseX <= 575) {
 				if(mouseY >= 450 && mouseY <= 500) {
+					click.soundFile();
+					click.playSound();
+					GamePanel.isBeginning = true;
 					GamePanel.state = GamePanel.STATE.MENU;
 				}
 			}
