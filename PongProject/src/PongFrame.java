@@ -1,23 +1,24 @@
-
+//import needed packages
 import java.awt.*;
-import java.awt.event.*;
-
 import javax.swing.*;
 
+//PongFrame class
 public class PongFrame extends JFrame{
-	PongPanel panel; //create panel object
+	PongPanel panel; //create PongPanel object
 	
-	//contructor method
+	/* constructor
+	 * pre: none
+	 * post: A PongFrame object has been created that creates the frame of the window
+	 */
 	PongFrame(){
-		panel = new PongPanel(); //define PongPanel object
+		panel = new PongPanel(); //defines the PongPanel object
 		this.add(panel); //add panel to frame
-		this.setTitle("Pong Game"); //set title of window
-		this.setResizable(false); //does not allow resizable
+		this.setTitle("Pong Game"); //set title of window screen
+		this.setResizable(false); //impossible to change size of frame
 		this.setBackground(Color.black); //set background to black
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //frame can be closed
 		this.pack(); //fits frame around the game screen
-		this.setVisible(true); //visible
-		this.setLocationRelativeTo(null); //centers window to screen
-		
+		this.setVisible(true); //make frame visible
+		this.setLocationRelativeTo(null); //centers window to screen		
 	}
 }
