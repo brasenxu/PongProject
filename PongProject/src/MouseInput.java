@@ -10,7 +10,7 @@ public class MouseInput implements MouseListener {
 		
 		if (PongPanel.state == PongPanel.STATE.MENU) {
 			// ai Button
-			if (mouseX >= PongPanel.GAME_WIDTH / 2 - 50 && mouseX <= PongPanel.GAME_WIDTH / 2 + 50) {
+			if (mouseX >= PongPanel.WIDTH / 2 - 50 && mouseX <= PongPanel.WIDTH / 2 + 50) {
 				if (mouseY >= 150 && mouseY <= 200) {
 					click.soundFile();
 					click.playSound();
@@ -20,7 +20,7 @@ public class MouseInput implements MouseListener {
 			}
 
 			// 1v1 Button
-			if (mouseX >= PongPanel.GAME_WIDTH / 2 - 50 && mouseX <= PongPanel.GAME_WIDTH / 2 + 50) {
+			if (mouseX >= PongPanel.WIDTH / 2 - 50 && mouseX <= PongPanel.WIDTH / 2 + 50) {
 				if (mouseY >= 250 && mouseY <= 300) {
 					click.soundFile();
 					click.playSound();
@@ -30,7 +30,7 @@ public class MouseInput implements MouseListener {
 			}
 
 			// help button
-			if (mouseX >= PongPanel.GAME_WIDTH / 2 - 96 && mouseX <= PongPanel.GAME_WIDTH / 2 + 146) {
+			if (mouseX >= PongPanel.WIDTH / 2 - 96 && mouseX <= PongPanel.WIDTH / 2 + 146) {
 				if (mouseY >= 350 && mouseY <= 400) {
 					click.soundFile();
 					click.playSound();
@@ -40,9 +40,9 @@ public class MouseInput implements MouseListener {
 			}
 			
 			//exit button
-			//public Rectangle exitButton = new Rectangle(PongPanel.GAME_WIDTH-100, PongPanel.GAME_HEIGHT-75, 75, 50);
-			if(mouseX >= PongPanel.GAME_WIDTH-100 && mouseX <= PongPanel.GAME_WIDTH-25) {
-				if(mouseY >= PongPanel.GAME_HEIGHT-75 && mouseY <= PongPanel.GAME_HEIGHT-25) {
+			//public Rectangle exitButton = new Rectangle(PongPanel.WIDTH-100, PongPanel.HEIGHT-75, 75, 50);
+			if(mouseX >= PongPanel.WIDTH-100 && mouseX <= PongPanel.WIDTH-25) {
+				if(mouseY >= PongPanel.HEIGHT-75 && mouseY <= PongPanel.HEIGHT-25) {
 					click.soundFile();
 					click.playSound();
 					System.exit(1);

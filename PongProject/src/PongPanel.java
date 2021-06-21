@@ -7,9 +7,9 @@ import javax.swing.*;
 public class PongPanel extends JPanel implements Runnable{
 	
 	//create variables needed
-	static final int GAME_WIDTH = 1000;
-	static final int GAME_HEIGHT = 555;
-	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
+	static final int WIDTH = 1000;
+	static final int HEIGHT = 555;
+	static final Dimension SCREEN_SIZE = new Dimension(WIDTH, HEIGHT);
 	static final int BALL_DIAMETER = 20;
 	static final int PADDLE_WIDTH = 25;
 	static final int PADDLE_HEIGHT = 100;
@@ -48,7 +48,7 @@ public class PongPanel extends JPanel implements Runnable{
 		newBall(); //create ball object
 		newPaddles(); //create paddle objects	
 		newAI(); //create ai object
-		score = new Score(GAME_WIDTH, GAME_HEIGHT); //create score object
+		score = new Score(WIDTH, HEIGHT); //create score object
 		paddleSound = new Sound(".//res//PaddleSound.wav");
 		wallSound = new Sound(".//res//WallSound.wav");
 		scoreSound = new Sound(".//res//ScoreSound.wav");
@@ -65,18 +65,18 @@ public class PongPanel extends JPanel implements Runnable{
 		
 	//new ball method
 	public void newBall() {
-		ball = new Ball((GAME_WIDTH/2)-(BALL_DIAMETER/2),(GAME_HEIGHT/2)-(BALL_DIAMETER/2),BALL_DIAMETER,BALL_DIAMETER);
+		ball = new Ball((WIDTH/2)-(BALL_DIAMETER/2),(HEIGHT/2)-(BALL_DIAMETER/2),BALL_DIAMETER,BALL_DIAMETER);
 	}
 	
 	//new paddle method
 	public void newPaddles() {
-		paddle1 = new Paddle(0,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,1);
-		paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
+		paddle1 = new Paddle(0,(HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,1);
+		paddle2 = new Paddle(WIDTH-PADDLE_WIDTH,(HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
 	}
 	
 	//new ai method
 	public void newAI() {
-		aiPaddle = new AIpaddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT, ball);
+		aiPaddle = new AIpaddle(WIDTH-PADDLE_WIDTH,(HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT, ball);
 	}
 	
 	//paint method
@@ -110,8 +110,8 @@ public class PongPanel extends JPanel implements Runnable{
 			}
 			score.player1 = 0;
 			score.player2 = 0;
-			ball.x = (GAME_WIDTH/2)-(BALL_DIAMETER/2);
-			ball.y = (GAME_HEIGHT/2)-(BALL_DIAMETER/2);
+			ball.x = (WIDTH/2)-(BALL_DIAMETER/2);
+			ball.y = (HEIGHT/2)-(BALL_DIAMETER/2);
 			if(isBeginning) {
 				Menu.soundFile();
 				Menu.playSound();
@@ -158,7 +158,7 @@ public class PongPanel extends JPanel implements Runnable{
 			wallSound.soundFile();
 			wallSound.playSound();
 		}
-		if(ball.y >= GAME_HEIGHT-BALL_DIAMETER) {
+		if(ball.y >= HEIGHT-BALL_DIAMETER) {
 			ball.setYDirection(-ball.yVelocity);
 			wallSound.soundFile();
 			wallSound.playSound();
@@ -191,20 +191,20 @@ public class PongPanel extends JPanel implements Runnable{
 		if(paddle1.y<=0) {
 			paddle1.y=0;
 		}
-		if(paddle1.y>= (GAME_HEIGHT-PADDLE_HEIGHT)) {
-			paddle1.y = GAME_HEIGHT-PADDLE_HEIGHT;
+		if(paddle1.y>= (HEIGHT-PADDLE_HEIGHT)) {
+			paddle1.y = HEIGHT-PADDLE_HEIGHT;
 		}
 		if(paddle2.y<=0) {
 			paddle2.y=0;
 		}
-		if(paddle2.y>= (GAME_HEIGHT-PADDLE_HEIGHT)) {
-			paddle2.y = GAME_HEIGHT-PADDLE_HEIGHT;
+		if(paddle2.y>= (HEIGHT-PADDLE_HEIGHT)) {
+			paddle2.y = HEIGHT-PADDLE_HEIGHT;
 		}
 		if(aiPaddle.y<=0) {
 			aiPaddle.y=0;
 		}
-		if(aiPaddle.y>= (GAME_HEIGHT-PADDLE_HEIGHT)) {
-			aiPaddle.y = GAME_HEIGHT-PADDLE_HEIGHT;
+		if(aiPaddle.y>= (HEIGHT-PADDLE_HEIGHT)) {
+			aiPaddle.y = HEIGHT-PADDLE_HEIGHT;
 		}
 		//give a player one point and creates new paddles & ball
 		if(ball.x <= 0) {
@@ -215,7 +215,7 @@ public class PongPanel extends JPanel implements Runnable{
 			newPaddles();
 			newAI();			
 		}
-		if(ball.x >= GAME_WIDTH-BALL_DIAMETER) {
+		if(ball.x >= WIDTH-BALL_DIAMETER) {
 			score.player1++;
 			scoreSound.soundFile();
 			scoreSound.playSound();
