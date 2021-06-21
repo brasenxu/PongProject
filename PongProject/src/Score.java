@@ -62,7 +62,7 @@ public class Score extends Rectangle{
 		
 		//if a player gets 10 points
 		if(player1 == 10) { //if player 1 wins
-			g.drawString("Player 1 wins!", (width/2)-245, 240); //draw end string
+			g.drawString("Player Blue WINS", (width/2)-250, 240); //draw end string
 			if(isEnd) { //if isEnd is true, play the winnerSound, and set isEnd to false to prevent repeat plays
 				winnerSound.soundFile();
 				winnerSound.playSound();
@@ -76,7 +76,7 @@ public class Score extends Rectangle{
 			g.drawString("Main Menu",MenuButton.x + 10,MenuButton.y + 30); //label the menu button
 		}
 		else if(player2 == 10) { //if player 2 wins
-			g.drawString("Player 2 wins!", (width/2)-245, 240); //draw end string
+			g.drawString("Player Yellow WINS", (width/2)-265, 240); //draw end string
 			if(isEnd) { //if isEnd is true, play the winnerSound, and set isEnd to false to prevent repeat plays
 				winnerSound.soundFile();
 				winnerSound.playSound();
