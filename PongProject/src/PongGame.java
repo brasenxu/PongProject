@@ -1,4 +1,3 @@
-package pong;
 
 //main method
 public class PongGame {

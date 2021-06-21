@@ -1,4 +1,3 @@
-package pong;
 
 import java.util.*;
 import java.awt.*;
