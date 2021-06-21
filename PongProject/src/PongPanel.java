@@ -1,38 +1,41 @@
-
-import java.util.*;
+//import needed package
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+//PongPanel class
 public class PongPanel extends JPanel implements Runnable{
 	
-	//create variables needed
-	static final int WIDTH = 1000;
-	static final int HEIGHT = 555;
-	static final Dimension SCREEN_SIZE = new Dimension(WIDTH, HEIGHT);
-	static final int BALL_DIAMETER = 20;
-	static final int PADDLE_WIDTH = 25;
-	static final int PADDLE_HEIGHT = 100;
-	Thread gameThread;
-	Image image;
-	Graphics graphics;
-	Random random;
-	Paddle paddle1;
+	//create variables needed in class
+	static final int WIDTH = 1000; //width of the screen
+	static final int HEIGHT = 555; //height of the screen
+	static final Dimension SCREEN_SIZE = new Dimension(WIDTH, HEIGHT); //size of screen
+	static final int BALL_DIAMETER = 20; //diameter of the ball
+	static final int PADDLE_WIDTH = 25; //width of paddle
+	static final int PADDLE_HEIGHT = 100; //height of paddle
+	Thread gameThread; //create Thread object
+	Image image; //create Image object
+	Graphics graphics; //create Graphics object
+	//create Paddle pbjects
+	Paddle paddle1; 
 	Paddle paddle2;
-	AIpaddle aiPaddle;
-	Ball ball;
-	Score score;
-	Menu menu;
-	Instructions instruct;
-	Sound paddleSound;
+	AIpaddle aiPaddle; //create AIpaddle object
+	Ball ball; //create Ball object
+	Score score; //create Score object
+	Menu menu; //create Menu object
+	Instructions instruct; //create Instructions object
+	//create sound objects
+	Sound paddleSound; 
 	Sound wallSound;
 	Sound scoreSound;
 	Sound Menu;
 	Sound Instructions;
+	
+	//create boolean variables for menu/intructions bgm
 	static boolean isInstructions = true;
 	static boolean isBeginning = true;
 	
-	//create enum
+	//create enum to track state
 	public static enum STATE{
 		MENU,
 		AI,
@@ -40,108 +43,135 @@ public class PongPanel extends JPanel implements Runnable{
 		INSTRUCTIONS,
 	};
 	
-	public static STATE state = STATE.MENU; //define enum, set it to menu
+	public static STATE state = STATE.MENU; //define enum state and set it to menu first
 	
+	/* constructor
+	 * pre: none
+	 * post: defines all the objects needed in the game
+	 */
 	PongPanel(){
 		menu = new Menu(); //create menu object
-		instruct = new Instructions();
+		instruct = new Instructions(); //create instructions object
 		newBall(); //create ball object
 		newPaddles(); //create paddle objects	
-		newAI(); //create ai object
+		newAI(); //create AI object
 		score = new Score(WIDTH, HEIGHT); //create score object
+		//define sound objects (call location of the sound files)
 		paddleSound = new Sound(".//res//PaddleSound.wav");
 		wallSound = new Sound(".//res//WallSound.wav");
 		scoreSound = new Sound(".//res//ScoreSound.wav");
 		Menu = new Sound(".//res//MenuMusic.wav");
 		Instructions = new Sound(".//res//InstructionsSong.wav");
-		this.setFocusable(true);
+		this.setFocusable(true); //set focus to panel (allows KeyEvent)
 		this.addKeyListener(new AL()); //create key listener
-		this.setPreferredSize(SCREEN_SIZE);
+		this.setPreferredSize(SCREEN_SIZE); //set size of panel
 		this.addMouseListener(new MouseInput()); //create mouse listener
 		//start game thread
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 		
-	//new ball method
+	/* defines the ball object
+	 * pre: none
+	 * post: the ball object has been defined
+	 */
 	public void newBall() {
 		ball = new Ball((WIDTH/2)-(BALL_DIAMETER/2),(HEIGHT/2)-(BALL_DIAMETER/2),BALL_DIAMETER,BALL_DIAMETER);
 	}
 	
-	//new paddle method
+	/* defines the paddle objects
+	 * pre: none
+	 * post: the 2 paddle objects have been defined
+	 */
 	public void newPaddles() {
 		paddle1 = new Paddle(0,(HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,1);
 		paddle2 = new Paddle(WIDTH-PADDLE_WIDTH,(HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT,2);
 	}
 	
-	//new ai method
+	/* defines the AI paddle object
+	 * pre: none
+	 * post: the AI paddle object has been defined
+	 */
 	public void newAI() {
 		aiPaddle = new AIpaddle(WIDTH-PADDLE_WIDTH,(HEIGHT/2)-(PADDLE_HEIGHT/2),PADDLE_WIDTH,PADDLE_HEIGHT, ball);
 	}
 	
-	//paint method
+	/* overrides existing paint method
+	 * pre: none
+	 * post: paints the panel
+	 */
 	public void paint(Graphics g) {
-		image = createImage(getWidth(), getHeight());
-		graphics = image.getGraphics();
+		image = createImage(getWidth(), getHeight()); //creates image object
+		graphics = image.getGraphics(); //set graphics object
 		draw(graphics); //call draw method
-		g.drawImage(image, 0, 0, this);
+		g.drawImage(image, 0, 0, this); //draws the image
 	}
 	
-	//draw method
+	/* draws the game
+	 * pre: none
+	 * post: depending on what state the game is in, various draw methods (from different classes) will be called
+	 */
 	public void draw(Graphics g) {
-		//if state is not menu, call the game
+		//if state is game or AI
 		if(state == STATE.GAME || state == STATE.AI) {
-			Menu.stop();
+			Menu.stop(); //stop any menu music from playing
 			//draws paddles, balls, and score
 			paddle1.draw(g); 
-			if(state == STATE.GAME) {
+			if(state == STATE.GAME) { //if multiplayer, draw the second paddle
 				paddle2.draw(g);
 			}
-			else if(state == STATE.AI) {
+			else if(state == STATE.AI) { //if singleplayer, draw the AI paddle
 				aiPaddle.draw(g);
 			}
-			ball.draw(g);
-			score.draw(g);
+			ball.draw(g); //draw the ball
+			score.draw(g); //draw the score
 			Toolkit.getDefaultToolkit().sync(); //makes game smoother
 		}
+		//if state is menu
 		else if(state == STATE.MENU) {
-			if(!isInstructions) {
-				Instructions.stop();
+			if(!isInstructions) { //if the program has visited instructions (instructions music playing)
+				Instructions.stop(); //stop the instruction music
 			}
+			//set both player score back to 0
 			score.player1 = 0;
 			score.player2 = 0;
+			//set ball position back to start
 			ball.x = (WIDTH/2)-(BALL_DIAMETER/2);
 			ball.y = (HEIGHT/2)-(BALL_DIAMETER/2);
-			if(isBeginning) {
+			if(isBeginning) { //only plays the menu music once, and loops that (until a Menu.stop() is called)
 				Menu.soundFile();
 				Menu.playSound();
 				Menu.loop();
 				isBeginning = false;
 			}
-			score.setEnd(true);
-			menu.draw(g); //call menu
-			
+			score.setEnd(true); //set the score ending back to true so that the end screen can happen
+			menu.draw(g); //call menu 
 		}
-		else  if (state == STATE.INSTRUCTIONS) //help screen
-		{
-			Menu.stop();
-			if(isInstructions) {
+		//if state is instructions
+		else  if (state == STATE.INSTRUCTIONS) {
+			Menu.stop(); //stop menu music
+			if(isInstructions) { //only plays the instruction music once, and loops that (until a Instructions.stop() is called)
 				Instructions.soundFile();
 				Instructions.playSound();
 				Instructions.loop();
 				isInstructions = false;
 			}
-			instruct.draw(g);
+			instruct.draw(g); //calls instructions
 		}
 	}
 	
-	//refreshes the location of the objects
+	/* updates the positions of the objects
+	 * pre: none
+	 * post: the locations of the ball and the paddles have been changed
+	 */
 	public void move() {
-		if(state == STATE.GAME) {
+		//if state is multiplayer, update both player paddles (and ball)
+		if(state == STATE.GAME) { 
 			ball.move();
 			paddle1.move();
 			paddle2.move();			
 		}
+		//if state is singleplayer, update player paddle and AI paddle (and ball)
 		else if(state == STATE.AI) {
 			ball.move();
 			paddle1.move();
@@ -149,17 +179,21 @@ public class PongPanel extends JPanel implements Runnable{
 		}
 	}
 	
-	//check object collision
-	public void checkCollision() {
-		
+	/* checks for object collision between objects/boundaries
+	 * pre: none
+	 * post: if collision, the location of the objects are changed
+	 */
+	public void checkCollision() {		
 		//bounce ball off top & bottom window edges
 		if(ball.y <=0) {
 			ball.setYDirection(-ball.yVelocity);
+			//play wall bounce sound
 			wallSound.soundFile();
 			wallSound.playSound();
 		}
 		if(ball.y >= HEIGHT-BALL_DIAMETER) {
 			ball.setYDirection(-ball.yVelocity);
+			//play wall bounce sound
 			wallSound.soundFile();
 			wallSound.playSound();
 		}
@@ -169,6 +203,7 @@ public class PongPanel extends JPanel implements Runnable{
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
+			//play paddle bounce sound
 			paddleSound.soundFile();
 			paddleSound.playSound();
 		}
@@ -176,6 +211,7 @@ public class PongPanel extends JPanel implements Runnable{
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
+			//play paddle bounce sound
 			paddleSound.soundFile();
 			paddleSound.playSound();
 		}
@@ -183,84 +219,105 @@ public class PongPanel extends JPanel implements Runnable{
 			ball.xVelocity = Math.abs(ball.xVelocity);
 			ball.setXDirection(-ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
+			//play paddle bounce sound
 			paddleSound.soundFile();
 			paddleSound.playSound();
 		}
 		
-		//stops paddles at window edges
+		//stops paddles at window edges (update position of paddles)
 		if(paddle1.y<=0) {
-			paddle1.y=0;
+			paddle1.y=0; //change paddle position
 		}
 		if(paddle1.y>= (HEIGHT-PADDLE_HEIGHT)) {
-			paddle1.y = HEIGHT-PADDLE_HEIGHT;
+			paddle1.y = HEIGHT-PADDLE_HEIGHT; //change paddle position
 		}
 		if(paddle2.y<=0) {
-			paddle2.y=0;
+			paddle2.y=0; //change paddle position
 		}
 		if(paddle2.y>= (HEIGHT-PADDLE_HEIGHT)) {
-			paddle2.y = HEIGHT-PADDLE_HEIGHT;
+			paddle2.y = HEIGHT-PADDLE_HEIGHT; //change paddle position
 		}
 		if(aiPaddle.y<=0) {
-			aiPaddle.y=0;
+			aiPaddle.y=0; //change paddle position
 		}
 		if(aiPaddle.y>= (HEIGHT-PADDLE_HEIGHT)) {
-			aiPaddle.y = HEIGHT-PADDLE_HEIGHT;
+			aiPaddle.y = HEIGHT-PADDLE_HEIGHT; //change paddle position
 		}
+		
+		//If ball goes past the left/right screen, 
 		//give a player one point and creates new paddles & ball
 		if(ball.x <= 0) {
-			score.player2++;			
+			score.player2++; //update score for player 2			
+			//play score sound
 			scoreSound.soundFile();
 			scoreSound.playSound();
+			//creates new paddles/ball
 			newBall();
 			newPaddles();
 			newAI();			
 		}
 		if(ball.x >= WIDTH-BALL_DIAMETER) {
-			score.player1++;
+			score.player1++; //update score for player 1
+			//play score sound
 			scoreSound.soundFile();
 			scoreSound.playSound();
+			//creates new paddles/ball
 			newBall();
 			newPaddles();
 			newAI();			
 		}
 	}
 	
-	//run thread
+	/* run thread method
+	 * pre: none
+	 * post: constantly updates, allowing for constant refresh of repaint;
+	 * also allows for constant check of collision and update position
+	 */
 	public void run() {
-		//game loop
-		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
-		double ns = 1000000000 / amountOfTicks;
+		long lastTime = System.nanoTime(); //get nano time
+		double amountOfTicks = 60.0; //set amount of ticks
+		double ns = 1000000000 / amountOfTicks; //set nanoseconds (1 billion / 60)
 		double delta = 0;
-		while(true) {
-			long now = System.nanoTime();
-			delta += (now - lastTime)/ns;
-			lastTime = now;
-			if(delta >= 1) {
-				if((state == STATE.GAME || state == STATE.AI) && (score.player1 < 10 && score.player2 < 10)) { 
+		while(true) { //run while game is running
+			long now = System.nanoTime(); //tracks time now
+			delta += (now - lastTime)/ns; //add the difference from now and lasttime divided by nano seconds to delta
+			lastTime = now; //change last time to now
+			if(delta >= 1) { 
+				if((state == STATE.GAME || state == STATE.AI) && (score.player1 < 10 && score.player2 < 10)) { //if the game is running
+					//update position and collision
 					move();
 					checkCollision();
-					repaint();
+					repaint(); //repaint screen
 					delta--;
 				}
-				else if(score.player1 == 10 || score.player2 == 10) {
-					repaint();
+				else if(score.player1 == 10 || score.player2 == 10) { //if the game is over
+					repaint(); //repaint screen
 					delta--;
 				}
-				else{
-					repaint();
+				else{ //in menu or instructions
+					repaint(); //repaint screen
 					delta--;
 				}
 			}
 		}
 	}
 	
-	//key adapter
+	//ActionListener class for tracking keyboard inputs
 	public class AL extends KeyAdapter{
+		
+		/* invoked when a key has been pressed
+		 * pre: none
+		 * post: calls the keyPressed of the Paddle class
+		 */
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
 			paddle2.keyPressed(e);
 		}
+		
+		/* invoked when a key has been released
+		 * pre: none
+		 * post: calls the keyReleased of the Paddle class
+		 */
 		public void keyReleased(KeyEvent e) {
 			paddle1.keyReleased(e);
 			paddle2.keyReleased(e);
