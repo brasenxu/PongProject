@@ -32,7 +32,7 @@ public class AIpaddle extends Rectangle{
 	 * post: the filled rectangle has been drawn, and has a colour of orange (looks yellow in the game screen)
 	 */
 	public void draw(Graphics g) {
-		//set colour of rectangles
+		//set colour of rectangle
 		g.setColor(Color.orange);
 		//draw rectangle
 		g.fillRect(x, y, width, height);
