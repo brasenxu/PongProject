@@ -5,12 +5,12 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class GameFrame extends JFrame{
-	GamePanel panel; //create panel object
+public class PongFrame extends JFrame{
+	PongPanel panel; //create panel object
 	
 	//contructor method
-	GameFrame(){
-		panel = new GamePanel(); //define GamePanel object
+	PongFrame(){
+		panel = new PongPanel(); //define PongPanel object
 		this.add(panel); //add panel to frame
 		this.setTitle("Pong Game"); //set title of window
 		this.setResizable(false); //does not allow resizable

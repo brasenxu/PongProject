@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GamePanel extends JPanel implements Runnable{
+public class PongPanel extends JPanel implements Runnable{
 	
 	//create variables needed
 	static final int GAME_WIDTH = 1000;
@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public static STATE state = STATE.MENU; //define enum, set it to menu
 	
-	GamePanel(){
+	PongPanel(){
 		menu = new Menu(); //create menu object
 		instruct = new Instructions();
 		newBall(); //create ball object

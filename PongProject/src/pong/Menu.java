@@ -11,10 +11,10 @@ public class Menu {
 	boolean isAi;
 	
 	//create rectangles as buttons
-	public Rectangle aiButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 150, 100, 50);
-	public Rectangle playButton = new Rectangle(GamePanel.GAME_WIDTH/2-50, 250, 100, 50);
-	public Rectangle helpButton = new Rectangle(GamePanel.GAME_WIDTH/2-96, 350, 200, 50);
-	public Rectangle exitButton = new Rectangle(GamePanel.GAME_WIDTH-100, GamePanel.GAME_HEIGHT-75, 75, 50);
+	public Rectangle aiButton = new Rectangle(PongPanel.GAME_WIDTH/2-50, 150, 100, 50);
+	public Rectangle playButton = new Rectangle(PongPanel.GAME_WIDTH/2-50, 250, 100, 50);
+	public Rectangle helpButton = new Rectangle(PongPanel.GAME_WIDTH/2-96, 350, 200, 50);
+	public Rectangle exitButton = new Rectangle(PongPanel.GAME_WIDTH-100, PongPanel.GAME_HEIGHT-75, 75, 50);
 	
 	
 	public void draw(Graphics g) {

@@ -18,7 +18,7 @@ public class AIpaddle extends Rectangle{
 	
 	//updates position of rectangle
 	public void move() {		
-		yVelocity = (int)((ball.yVelocity)/1.15);
+		yVelocity = (int)((ball.yVelocity)/1.25);
 		y= y + yVelocity;
 	}
 	

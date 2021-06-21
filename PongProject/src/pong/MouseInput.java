@@ -9,63 +9,63 @@ public class MouseInput implements MouseListener {
 		int mouseY = e.getY();
 		Sound click = new Sound(".//res//buttonClick.wav");
 		
-		if (GamePanel.state == GamePanel.STATE.MENU) {
+		if (PongPanel.state == PongPanel.STATE.MENU) {
 			// ai Button
-			if (mouseX >= GamePanel.GAME_WIDTH / 2 - 50 && mouseX <= GamePanel.GAME_WIDTH / 2 + 50) {
+			if (mouseX >= PongPanel.GAME_WIDTH / 2 - 50 && mouseX <= PongPanel.GAME_WIDTH / 2 + 50) {
 				if (mouseY >= 150 && mouseY <= 200) {
 					click.soundFile();
 					click.playSound();
-					GamePanel.isBeginning = true;
-					GamePanel.state = GamePanel.STATE.AI;
+					PongPanel.isBeginning = true;
+					PongPanel.state = PongPanel.STATE.AI;
 				}
 			}
 
 			// 1v1 Button
-			if (mouseX >= GamePanel.GAME_WIDTH / 2 - 50 && mouseX <= GamePanel.GAME_WIDTH / 2 + 50) {
+			if (mouseX >= PongPanel.GAME_WIDTH / 2 - 50 && mouseX <= PongPanel.GAME_WIDTH / 2 + 50) {
 				if (mouseY >= 250 && mouseY <= 300) {
 					click.soundFile();
 					click.playSound();
-					GamePanel.isBeginning = true;
-					GamePanel.state = GamePanel.STATE.GAME;
+					PongPanel.isBeginning = true;
+					PongPanel.state = PongPanel.STATE.GAME;
 				}
 			}
 
 			// help button
-			if (mouseX >= GamePanel.GAME_WIDTH / 2 - 96 && mouseX <= GamePanel.GAME_WIDTH / 2 + 146) {
+			if (mouseX >= PongPanel.GAME_WIDTH / 2 - 96 && mouseX <= PongPanel.GAME_WIDTH / 2 + 146) {
 				if (mouseY >= 350 && mouseY <= 400) {
 					click.soundFile();
 					click.playSound();
-					GamePanel.isInstructions = true;
-					GamePanel.state = GamePanel.STATE.INSTRUCTIONS;
+					PongPanel.isInstructions = true;
+					PongPanel.state = PongPanel.STATE.INSTRUCTIONS;
 				}
 			}
 			
 			//exit button
-			//public Rectangle exitButton = new Rectangle(GamePanel.GAME_WIDTH-100, GamePanel.GAME_HEIGHT-75, 75, 50);
-			if(mouseX >= GamePanel.GAME_WIDTH-100 && mouseX <= GamePanel.GAME_WIDTH-25) {
-				if(mouseY >= GamePanel.GAME_HEIGHT-75 && mouseY <= GamePanel.GAME_HEIGHT-25) {
+			//public Rectangle exitButton = new Rectangle(PongPanel.GAME_WIDTH-100, PongPanel.GAME_HEIGHT-75, 75, 50);
+			if(mouseX >= PongPanel.GAME_WIDTH-100 && mouseX <= PongPanel.GAME_WIDTH-25) {
+				if(mouseY >= PongPanel.GAME_HEIGHT-75 && mouseY <= PongPanel.GAME_HEIGHT-25) {
 					click.soundFile();
 					click.playSound();
 					System.exit(1);
 				}
 			}
 		}
-		if (GamePanel.state != GamePanel.STATE.MENU) {
+		if (PongPanel.state != PongPanel.STATE.MENU) {
 			//main menu button(s)
 			if (mouseX >= 300 && mouseX <= 350) {
 				if (mouseY >= 10 && mouseY <= 60) {
 					click.soundFile();
 					click.playSound();
-					GamePanel.isBeginning = true;
-					GamePanel.state = GamePanel.STATE.MENU;
+					PongPanel.isBeginning = true;
+					PongPanel.state = PongPanel.STATE.MENU;
 				}
 			}
 			if(mouseX >= 425 && mouseX <= 575) {
 				if(mouseY >= 450 && mouseY <= 500) {
 					click.soundFile();
 					click.playSound();
-					GamePanel.isBeginning = true;
-					GamePanel.state = GamePanel.STATE.MENU;
+					PongPanel.isBeginning = true;
+					PongPanel.state = PongPanel.STATE.MENU;
 				}
 			}
 		}
