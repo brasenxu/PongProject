@@ -46,7 +46,7 @@ public class Menu {
 		//button labels
 		g.drawString("1 vs AI", aiButton.x + 5, aiButton.y + 37);
 		g.drawString("1 vs 1", playButton.x + 10, playButton.y + 37);
-		g.drawString("Intructions", helpButton.x + 29, helpButton.y + 37);
+		g.drawString("Instructions", helpButton.x + 29, helpButton.y + 37);
 		g.drawString("EXIT", exitButton.x + 5, exitButton.y + 37);
 		
 		g.drawString("Made by: Brasen & Nathan", 325, 475);			

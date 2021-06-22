@@ -72,7 +72,7 @@ public class MouseInput implements MouseListener {
 					PongPanel.state = PongPanel.STATE.MENU; //set game state to menu gamemode
 				}
 			}
-			if(mouseX >= 425 && mouseX <= 575) { //location of menu button
+			if(mouseX >= 425 && mouseX <= 575 && !Score.isEnd) { //location of menu button at the end
 				if(mouseY >= 450 && mouseY <= 500) {
 					//play mouse click sound
 					click.soundFile();

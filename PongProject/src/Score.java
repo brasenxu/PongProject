@@ -13,7 +13,7 @@ public class Score extends Rectangle{
 	static int height; //height of screen
 	int player1; //player 1 score
 	int player2; //player 2 score
-	boolean isEnd = true; //variable for ending sound
+	static boolean isEnd = true; //variable for ending sound
 	Sound winnerSound; //end screen Sound object
 	
 	//create rectangles for the buttons
