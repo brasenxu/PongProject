@@ -138,6 +138,10 @@ public class PongPanel extends JPanel implements Runnable{
 			//set ball position back to start
 			ball.x = (WIDTH/2)-(BALL_DIAMETER/2);
 			ball.y = (HEIGHT/2)-(BALL_DIAMETER/2);
+			//set paddle position back to start
+			paddle1.y = (HEIGHT/2)-(PADDLE_HEIGHT/2);
+			paddle2.y = (HEIGHT/2)-(PADDLE_HEIGHT/2);
+			aiPaddle.y = (HEIGHT/2)-(PADDLE_HEIGHT/2);
 			if(isBeginning) { //only plays the menu music once, and loops that (until a Menu.stop() is called)
 				Menu.soundFile();
 				Menu.playSound();
